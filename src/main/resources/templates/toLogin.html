@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>商务通后台管理系统</title>
+    <link rel="stylesheet" th:href="@{/login/css/style.css}"/>
+
+</head>
+
+<body class="body_bj">
+
+	<div class="login">
+		<div class="logo">
+			<img th:src="@{/login/img/logo.png}" alt="">
+		</div>
+		<ul class="login-list">
+			<li><input id="user_input" type="text" placeholder="请输入账号"></li>
+			<li><input id="pwd_input" type="password" placeholder="请输入密码"></li>
+			<li id="submitBtn"><a class="btn">登录</a></li>
+			<li><span id="errorMsg"></span></li>
+		</ul>
+	</div>
+
+	<script type="text/javascript" th:src="@{/js/jquery-3.3.1.js}"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-md5.js}"></script>
+	<script type="text/javascript" th:src="@{/login/js/toLogin.js}"></script>
+
+</body>
+</html>
