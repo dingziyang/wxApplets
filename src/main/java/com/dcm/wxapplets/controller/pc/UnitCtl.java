@@ -229,7 +229,7 @@ public class UnitCtl {
     @GetMapping("/page")
     public ModelAndView getPage(){
 
-        ModelAndView modelAndView = new ModelAndView("/system/jbsz/unit/unit");
+        ModelAndView modelAndView = new ModelAndView("/unit");
         return modelAndView;
     }
     @ApiOperation(value = "unitForm", notes = "单位", httpMethod = "GET")

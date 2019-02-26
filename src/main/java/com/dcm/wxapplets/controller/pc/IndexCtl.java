@@ -30,6 +30,18 @@ public class IndexCtl {
         return modelAndView;
     }
 
+    /**
+     * @author dcm
+     * @date 2018-5-30 18:50
+     * @Description: 主页面内容
+     * @return org.springframework.web.servlet.ModelAndView
+     * @throws
+     */
+    @GetMapping("/pc/index/welcome")
+    public ModelAndView welcome(){
 
+        ModelAndView modelAndView = new ModelAndView("/welcome");
+        return modelAndView;
+    }
 
 }
