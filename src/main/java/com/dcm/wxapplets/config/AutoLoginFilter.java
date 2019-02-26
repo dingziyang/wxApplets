@@ -1,6 +1,6 @@
 package com.dcm.wxapplets.config;
 
-import com.dcm.wxapplets.entity.SwtUser;
+import com.dcm.wxapplets.entity.SysUser;
 import com.dcm.wxapplets.utils.date.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,7 +87,7 @@ public class AutoLoginFilter implements Filter {
             return;
         } else { // 非静态资源
             log.info("---------url:" + url);
-            SwtUser user = (SwtUser) request.getSession().getAttribute(GlobalConstant.LOGIN_USER);
+            SysUser user = (SysUser) request.getSession().getAttribute(GlobalConstant.LOGIN_USER);
             if (user != null) { // 用户已登录
                 if (url.equals("/")) { // 已登录，访问根路径，自动跳转到主页面
                     response.sendRedirect( "/pc/index");
@@ -117,8 +117,8 @@ public class AutoLoginFilter implements Filter {
     }
 
     private boolean isAdmin(HttpServletRequest request) {
-        SwtUser user = (SwtUser) request.getSession().getAttribute(GlobalConstant.LOGIN_USER);
-        if( user != null && "admin".equals(user.getUsername())) {
+        SysUser user = (SysUser) request.getSession().getAttribute(GlobalConstant.LOGIN_USER);
+        if( user != null && "admin".equals(user.getUserName())) {
             return true;
         } else {
             return false;

@@ -1,7 +1,7 @@
 package com.dcm.wxapplets.utils;
 
 import com.dcm.wxapplets.config.GlobalConstant;
-import com.dcm.wxapplets.entity.SwtUser;
+import com.dcm.wxapplets.entity.SysUser;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,8 +34,8 @@ public class SessionUserUtil {
       * @return com.sdcm.common.entity.admin.User
       * @throws
       */
-    public static SwtUser getUser(HttpServletRequest request) {
-        SwtUser user = (SwtUser) request.getSession().getAttribute(GlobalConstant.LOGIN_USER);
+    public static SysUser getUser(HttpServletRequest request) {
+        SysUser user = (SysUser) request.getSession().getAttribute(GlobalConstant.LOGIN_USER);
         return user;
     }
 }

@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dcm.wxapplets.dao.SwtUserDao" >
-  <resultMap id="BaseResultMap" type="com.dcm.wxapplets.entity.SwtUser" >
+<mapper namespace="com.dcm.wxapplets.dao.SysMenuDao" >
+  <resultMap id="BaseResultMap" type="com.dcm.wxapplets.entity.SysMenu" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="pwd" property="pwd" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="wx" property="wx" jdbcType="VARCHAR" />
-    <result column="openid" property="openid" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="INTEGER" />
-    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="uri" property="uri" jdbcType="VARCHAR" />
+    <result column="enable" property="enable" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -72,15 +74,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, username, pwd, phone, wx, openid, sex, address, create_time, update_time
+    id, name, code, level, icon, uri, enable, remark, create_by, create_time, update_by, 
+    update_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dcm.wxapplets.query.SwtUserExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dcm.wxapplets.query.SysMenuExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List_Dy" />
-    from swt_user
+    from sys_menu
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,58 +94,64 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from swt_user
+    from sys_menu
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from swt_user
+    delete from sys_menu
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.dcm.wxapplets.query.SwtUserExample" >
-    delete from swt_user
+  <delete id="deleteByExample" parameterType="com.dcm.wxapplets.query.SysMenuExample" >
+    delete from sys_menu
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.dcm.wxapplets.entity.SwtUser" useGeneratedKeys="true" keyProperty="id" >
-    insert into swt_user (id, username, pwd, 
-      phone, wx, openid, 
-      sex, address, create_time, 
-      update_time)
-    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{wx,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.dcm.wxapplets.entity.SysMenu" useGeneratedKeys="true" keyProperty="id" >
+    insert into sys_menu (id, name, code, 
+      level, icon, uri, enable, 
+      remark, create_by, create_time, 
+      update_by, update_time)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{level,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, #{enable,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.dcm.wxapplets.entity.SwtUser" useGeneratedKeys="true" keyProperty="id" >
-    insert into swt_user
+  <insert id="insertSelective" parameterType="com.dcm.wxapplets.entity.SysMenu" useGeneratedKeys="true" keyProperty="id" >
+    insert into sys_menu
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="username != null" >
-        username,
+      <if test="name != null" >
+        name,
       </if>
-      <if test="pwd != null" >
-        pwd,
+      <if test="code != null" >
+        code,
       </if>
-      <if test="phone != null" >
-        phone,
+      <if test="level != null" >
+        level,
       </if>
-      <if test="wx != null" >
-        wx,
+      <if test="icon != null" >
+        icon,
       </if>
-      <if test="openid != null" >
-        openid,
+      <if test="uri != null" >
+        uri,
       </if>
-      <if test="sex != null" >
-        sex,
+      <if test="enable != null" >
+        enable,
       </if>
-      <if test="address != null" >
-        address,
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createBy != null" >
+        create_by,
       </if>
       <if test="createTime != null" >
         create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
       </if>
       <if test="updateTime != null" >
         update_time,
@@ -152,70 +161,82 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
-      <if test="pwd != null" >
-        #{pwd,jdbcType=VARCHAR},
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
       </if>
-      <if test="phone != null" >
-        #{phone,jdbcType=VARCHAR},
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
       </if>
-      <if test="wx != null" >
-        #{wx,jdbcType=VARCHAR},
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
       </if>
-      <if test="openid != null" >
-        #{openid,jdbcType=VARCHAR},
+      <if test="uri != null" >
+        #{uri,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=INTEGER},
+      <if test="enable != null" >
+        #{enable,jdbcType=INTEGER},
       </if>
-      <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" resultType="java.lang.Integer" parameterType="com.dcm.wxapplets.query.SwtUserExample" >
-    select count(*) from swt_user
+  <select id="countByExample" resultType="java.lang.Integer" parameterType="com.dcm.wxapplets.query.SysMenuExample" >
+    select count(*) from sys_menu
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update swt_user
+    update sys_menu
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.username != null" >
-        username = #{record.username,jdbcType=VARCHAR},
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.pwd != null" >
-        pwd = #{record.pwd,jdbcType=VARCHAR},
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
       </if>
-      <if test="record.phone != null" >
-        phone = #{record.phone,jdbcType=VARCHAR},
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=INTEGER},
       </if>
-      <if test="record.wx != null" >
-        wx = #{record.wx,jdbcType=VARCHAR},
+      <if test="record.icon != null" >
+        icon = #{record.icon,jdbcType=VARCHAR},
       </if>
-      <if test="record.openid != null" >
-        openid = #{record.openid,jdbcType=VARCHAR},
+      <if test="record.uri != null" >
+        uri = #{record.uri,jdbcType=VARCHAR},
       </if>
-      <if test="record.sex != null" >
-        sex = #{record.sex,jdbcType=INTEGER},
+      <if test="record.enable != null" >
+        enable = #{record.enable,jdbcType=INTEGER},
       </if>
-      <if test="record.address != null" >
-        address = #{record.address,jdbcType=VARCHAR},
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=BIGINT},
       </if>
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null" >
+        update_by = #{record.updateBy,jdbcType=BIGINT},
       </if>
       <if test="record.updateTime != null" >
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -226,47 +247,55 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update swt_user
+    update sys_menu
     set id = #{record.id,jdbcType=BIGINT},
-      username = #{record.username,jdbcType=VARCHAR},
-      pwd = #{record.pwd,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      wx = #{record.wx,jdbcType=VARCHAR},
-      openid = #{record.openid,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=INTEGER},
-      address = #{record.address,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=INTEGER},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      uri = #{record.uri,jdbcType=VARCHAR},
+      enable = #{record.enable,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=BIGINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=BIGINT},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dcm.wxapplets.entity.SwtUser" >
-    update swt_user
+  <update id="updateByPrimaryKeySelective" parameterType="com.dcm.wxapplets.entity.SysMenu" >
+    update sys_menu
     <set >
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="pwd != null" >
-        pwd = #{pwd,jdbcType=VARCHAR},
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
       </if>
-      <if test="phone != null" >
-        phone = #{phone,jdbcType=VARCHAR},
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
       </if>
-      <if test="wx != null" >
-        wx = #{wx,jdbcType=VARCHAR},
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
       </if>
-      <if test="openid != null" >
-        openid = #{openid,jdbcType=VARCHAR},
+      <if test="uri != null" >
+        uri = #{uri,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=INTEGER},
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=INTEGER},
       </if>
-      <if test="address != null" >
-        address = #{address,jdbcType=VARCHAR},
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
       </if>
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
@@ -274,16 +303,18 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dcm.wxapplets.entity.SwtUser" >
-    update swt_user
-    set username = #{username,jdbcType=VARCHAR},
-      pwd = #{pwd,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      wx = #{wx,jdbcType=VARCHAR},
-      openid = #{openid,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=INTEGER},
-      address = #{address,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.dcm.wxapplets.entity.SysMenu" >
+    update sys_menu
+    set name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      uri = #{uri,jdbcType=VARCHAR},
+      enable = #{enable,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

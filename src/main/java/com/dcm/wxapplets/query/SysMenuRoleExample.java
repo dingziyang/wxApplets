@@ -1,6 +1,5 @@
 package com.dcm.wxapplets.query;
 
-
 import com.dcm.wxapplets.base.BaseExample;
 
 import java.io.Serializable;
@@ -8,9 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class UnitExample extends BaseExample {
+public class SysMenuRoleExample extends BaseExample {
 
-	private static final long serialVersionUID = 3234002182671250282L;
+	private static final long serialVersionUID = 498009014708803197L;
 
     protected String orderByClause;
 
@@ -18,7 +17,7 @@ public class UnitExample extends BaseExample {
 
     protected List<Criteria> oredCriteria;
 
-    public UnitExample() {
+    public SysMenuRoleExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -73,7 +72,7 @@ public class UnitExample extends BaseExample {
 
 protected abstract static class GeneratedCriteria implements Serializable {
 
-	private static final long serialVersionUID = 5336865890019895302L;
+	private static final long serialVersionUID = 4810593849243193041L;
 
         protected List<Criterion> criteria;
 
@@ -242,76 +241,6 @@ protected abstract static class GeneratedCriteria implements Serializable {
 
         public Criteria andNameNotBetween(String value1, String value2) {
             addCriterion("name not between", value1, value2, "name");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeIsNull() {
-            addCriterion("code is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeIsNotNull() {
-            addCriterion("code is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeEqualTo(String value) {
-            addCriterion("code =", value, "code");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeNotEqualTo(String value) {
-            addCriterion("code <>", value, "code");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeGreaterThan(String value) {
-            addCriterion("code >", value, "code");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("code >=", value, "code");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeLessThan(String value) {
-            addCriterion("code <", value, "code");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeLessThanOrEqualTo(String value) {
-            addCriterion("code <=", value, "code");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeLike(String value) {
-            addCriterion("code like", value, "code");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeNotLike(String value) {
-            addCriterion("code not like", value, "code");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeIn(List<String> values) {
-            addCriterion("code in", values, "code");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeNotIn(List<String> values) {
-            addCriterion("code not in", values, "code");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeBetween(String value1, String value2) {
-            addCriterion("code between", value1, value2, "code");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeNotBetween(String value1, String value2) {
-            addCriterion("code not between", value1, value2, "code");
             return (Criteria) this;
         }
 
@@ -492,6 +421,66 @@ protected abstract static class GeneratedCriteria implements Serializable {
 
         public Criteria andEnableNotBetween(Integer value1, Integer value2) {
             addCriterion("enable not between", value1, value2, "enable");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustEnableIsNull() {
+            addCriterion("must_enable is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustEnableIsNotNull() {
+            addCriterion("must_enable is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustEnableEqualTo(Integer value) {
+            addCriterion("must_enable =", value, "mustEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustEnableNotEqualTo(Integer value) {
+            addCriterion("must_enable <>", value, "mustEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustEnableGreaterThan(Integer value) {
+            addCriterion("must_enable >", value, "mustEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustEnableGreaterThanOrEqualTo(Integer value) {
+            addCriterion("must_enable >=", value, "mustEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustEnableLessThan(Integer value) {
+            addCriterion("must_enable <", value, "mustEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustEnableLessThanOrEqualTo(Integer value) {
+            addCriterion("must_enable <=", value, "mustEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustEnableIn(List<Integer> values) {
+            addCriterion("must_enable in", values, "mustEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustEnableNotIn(List<Integer> values) {
+            addCriterion("must_enable not in", values, "mustEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustEnableBetween(Integer value1, Integer value2) {
+            addCriterion("must_enable between", value1, value2, "mustEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustEnableNotBetween(Integer value1, Integer value2) {
+            addCriterion("must_enable not between", value1, value2, "mustEnable");
             return (Criteria) this;
         }
 
@@ -808,7 +797,7 @@ protected abstract static class GeneratedCriteria implements Serializable {
 
 public static class Criteria extends GeneratedCriteria implements Serializable {
 
-	private static final long serialVersionUID = 798786606072490700L;
+	private static final long serialVersionUID = 3335014513968866187L;
 
 
         protected Criteria() {
@@ -818,7 +807,7 @@ public static class Criteria extends GeneratedCriteria implements Serializable {
 
 public static class Criterion implements Serializable {
 
-	private static final long serialVersionUID = 7513225564491197477L;
+	private static final long serialVersionUID = 1710341840346552033L;
 
         private String condition;
 

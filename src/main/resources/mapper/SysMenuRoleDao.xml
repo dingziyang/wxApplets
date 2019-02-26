@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dcm.wxapplets.dao.UnitDao" >
-  <resultMap id="BaseResultMap" type="com.dcm.wxapplets.entity.Unit" >
+<mapper namespace="com.dcm.wxapplets.dao.SysMenuRoleDao" >
+  <resultMap id="BaseResultMap" type="com.dcm.wxapplets.entity.SysMenuRole" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="level" property="level" jdbcType="INTEGER" />
     <result column="idx" property="idx" jdbcType="INTEGER" />
     <result column="enable" property="enable" jdbcType="INTEGER" />
+    <result column="must_enable" property="mustEnable" jdbcType="INTEGER" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="create_by" property="createBy" jdbcType="BIGINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -73,15 +73,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, code, level, idx, enable, remark, create_by, create_time, update_by, update_time
+    id, name, level, idx, enable, must_enable, remark, create_by, create_time, update_by,
+    update_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dcm.wxapplets.query.UnitExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dcm.wxapplets.query.SysMenuRoleExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List_Dy" />
-    from admin_unit
+    from sys_menu_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,42 +91,39 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
-    from admin_unit
+    from sys_menu_role
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from admin_unit
+    delete from sys_menu_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.dcm.wxapplets.query.UnitExample" >
-    delete from admin_unit
+  <delete id="deleteByExample" parameterType="com.dcm.wxapplets.query.SysMenuRoleExample" >
+    delete from sys_menu_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.dcm.wxapplets.entity.Unit" useGeneratedKeys="true" keyProperty="id" >
-    insert into admin_unit (id, name, code, 
-      level, idx, enable, 
-      remark, create_by, create_time, 
+  <insert id="insert" parameterType="com.dcm.wxapplets.entity.SysMenuRole" useGeneratedKeys="true" keyProperty="id" >
+    insert into sys_menu_role (id, name, level,
+      idx, enable, must_enable,
+      remark, create_by, create_time,
       update_by, update_time)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
-      #{level,jdbcType=INTEGER}, #{idx,jdbcType=INTEGER}, #{enable,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER},
+      #{idx,jdbcType=INTEGER}, #{enable,jdbcType=INTEGER}, #{mustEnable,jdbcType=INTEGER},
+      #{remark,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
       #{updateBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.dcm.wxapplets.entity.Unit" useGeneratedKeys="true" keyProperty="id" >
-    insert into admin_unit
+  <insert id="insertSelective" parameterType="com.dcm.wxapplets.entity.SysMenuRole" useGeneratedKeys="true" keyProperty="id" >
+    insert into sys_menu_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
       <if test="name != null" >
         name,
-      </if>
-      <if test="code != null" >
-        code,
       </if>
       <if test="level != null" >
         level,
@@ -135,6 +133,9 @@
       </if>
       <if test="enable != null" >
         enable,
+      </if>
+      <if test="mustEnable != null" >
+        must_enable,
       </if>
       <if test="remark != null" >
         remark,
@@ -159,9 +160,6 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="code != null" >
-        #{code,jdbcType=VARCHAR},
-      </if>
       <if test="level != null" >
         #{level,jdbcType=INTEGER},
       </if>
@@ -170,6 +168,9 @@
       </if>
       <if test="enable != null" >
         #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="mustEnable != null" >
+        #{mustEnable,jdbcType=INTEGER},
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
@@ -188,23 +189,20 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" resultType="java.lang.Integer" parameterType="com.dcm.wxapplets.query.UnitExample" >
-    select count(*) from admin_unit
+  <select id="countByExample" resultType="java.lang.Integer" parameterType="com.dcm.wxapplets.query.SysMenuRoleExample" >
+    select count(*) from sys_menu_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update admin_unit
+    update sys_menu_role
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.code != null" >
-        code = #{record.code,jdbcType=VARCHAR},
       </if>
       <if test="record.level != null" >
         level = #{record.level,jdbcType=INTEGER},
@@ -214,6 +212,9 @@
       </if>
       <if test="record.enable != null" >
         enable = #{record.enable,jdbcType=INTEGER},
+      </if>
+      <if test="record.mustEnable != null" >
+        must_enable = #{record.mustEnable,jdbcType=INTEGER},
       </if>
       <if test="record.remark != null" >
         remark = #{record.remark,jdbcType=VARCHAR},
@@ -236,13 +237,13 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update admin_unit
+    update sys_menu_role
     set id = #{record.id,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
-      code = #{record.code,jdbcType=VARCHAR},
       level = #{record.level,jdbcType=INTEGER},
       idx = #{record.idx,jdbcType=INTEGER},
       enable = #{record.enable,jdbcType=INTEGER},
+      must_enable = #{record.mustEnable,jdbcType=INTEGER},
       remark = #{record.remark,jdbcType=VARCHAR},
       create_by = #{record.createBy,jdbcType=BIGINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -252,14 +253,11 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dcm.wxapplets.entity.Unit" >
-    update admin_unit
+  <update id="updateByPrimaryKeySelective" parameterType="com.dcm.wxapplets.entity.SysMenuRole" >
+    update sys_menu_role
     <set >
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="code != null" >
-        code = #{code,jdbcType=VARCHAR},
       </if>
       <if test="level != null" >
         level = #{level,jdbcType=INTEGER},
@@ -269,6 +267,9 @@
       </if>
       <if test="enable != null" >
         enable = #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="mustEnable != null" >
+        must_enable = #{mustEnable,jdbcType=INTEGER},
       </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
@@ -288,13 +289,13 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dcm.wxapplets.entity.Unit" >
-    update admin_unit
+  <update id="updateByPrimaryKey" parameterType="com.dcm.wxapplets.entity.SysMenuRole" >
+    update sys_menu_role
     set name = #{name,jdbcType=VARCHAR},
-      code = #{code,jdbcType=VARCHAR},
       level = #{level,jdbcType=INTEGER},
       idx = #{idx,jdbcType=INTEGER},
       enable = #{enable,jdbcType=INTEGER},
+      must_enable = #{mustEnable,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
       create_by = #{createBy,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},

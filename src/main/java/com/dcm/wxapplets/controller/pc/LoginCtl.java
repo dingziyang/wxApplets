@@ -3,9 +3,9 @@ package com.dcm.wxapplets.controller.pc;
 import com.dcm.wxapplets.config.GlobalConstant;
 import com.dcm.wxapplets.config.ResultCode;
 import com.dcm.wxapplets.config.ResultVO;
-import com.dcm.wxapplets.entity.SwtUser;
-import com.dcm.wxapplets.query.SwtUserExample;
-import com.dcm.wxapplets.service.SwtUserService;
+import com.dcm.wxapplets.entity.SysUser;
+import com.dcm.wxapplets.query.SysUserExample;
+import com.dcm.wxapplets.service.SysUserService;
 import com.dcm.wxapplets.utils.date.DateUtil;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
@@ -39,7 +39,7 @@ public class LoginCtl {
     private static final Logger log = LoggerFactory.getLogger(LoginCtl.class);
 
     @Autowired
-    private SwtUserService userService;
+    private SysUserService userService;
 
     /**
      * @author dcm
@@ -72,9 +72,9 @@ public class LoginCtl {
         vo.setServerTime(DateUtil.getCurrTimeStr());
         try {
             if (!StringUtils.isEmpty(loginName) && !StringUtils.isEmpty(password)) {
-                SwtUserExample example = new SwtUserExample();
-                example.createCriteria().andUsernameEqualTo(loginName);
-                List<SwtUser> users = userService.selectByExample(example);
+                SysUserExample example = new SysUserExample();
+                example.createCriteria().andUserNameEqualTo(loginName);
+                List<SysUser> users = userService.selectByExample(example);
 
                 if(CollectionUtils.isEmpty(users) || users.get(0) == null) {
                     log.info("登录失败,没有这个用户");
@@ -82,16 +82,22 @@ public class LoginCtl {
                     vo.setMessage("登录失败,没有这个用户");
                     return vo;
                 } else {
-                    SwtUser user = users.get(0);
-                    user = this.userService.getById(user.getId()); // 填充user的若干关联信息
+                    SysUser user = users.get(0);
+                    user = this.userService.selectByPrimaryKey(user.getId()); // 填充user的若干关联信息
                     if(password.equals(user.getPwd())){
-                        log.info("登录成功，登录用户:" + loginName + " ; ===========>session Id： " + req.getSession().getId());
-                        req.getSession().setAttribute(GlobalConstant.LOGIN_USER, user);
-//                        req.getSession().setMaxInactiveInterval(20);
-                        vo.setStatus(ResultCode.CODE_200);
-                        vo.setMessage("登录成功");
-                        vo.setData(user);
-                        return vo;
+                        if(user.getWorker() == 1){
+                            log.info("登录失败，工人账号不允许登录系统");
+                            vo.setStatus(ResultCode.CODE_501);
+                            vo.setMessage("登录失败，工人账号不允许登录系统");
+                            return vo;
+                        } else {
+                            log.info("登录成功，登录用户:" + loginName + " ; ===========>session Id： " + req.getSession().getId());
+                            req.getSession().setAttribute(GlobalConstant.LOGIN_USER, user);
+                            vo.setStatus(ResultCode.CODE_200);
+                            vo.setMessage("登录成功");
+                            vo.setData(user);
+                            return vo;
+                        }
                     } else {
                         log.info("登录失败，密码错误");
                         vo.setStatus(ResultCode.CODE_405);
