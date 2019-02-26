@@ -43,6 +43,12 @@ public class AutoLoginFilter implements Filter {
         String url = request.getRequestURI().substring(request.getContextPath().length());
         //log.info("---------url:" + url);
 
+        // 微信接口不拦截
+        if (url.startsWith("/wx")) {
+            chain.doFilter(request, response);//不拦截
+            return;
+        }
+
         // 登录相关操作不拦截
         if (url.startsWith("/pc/login/")) {
             chain.doFilter(request, response);//不拦截
