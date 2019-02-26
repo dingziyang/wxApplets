@@ -55,7 +55,7 @@ $(function () {
             if(user.msg === "success") {
                 formCommit(user.loginName, user.password);
             } else {
-                alert(user.msg);
+                $("#errorMsg").text(user.msg);
             }
         }
     });
@@ -66,7 +66,7 @@ $(function () {
         if(user.msg === "success") {
             formCommit(user.loginName, user.password);
         } else {
-            alert(user.msg);
+            $("#errorMsg").text(user.msg);
         }
     });
 });

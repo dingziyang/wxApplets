@@ -16,6 +16,8 @@ import com.dcm.wxapplets.query.SwtUserExample;
 import com.dcm.wxapplets.service.SwtUserService;
 import com.dcm.wxapplets.utils.SessionUserUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -91,28 +93,83 @@ public class SwtUserCtl {
 		return vo;
 	}
 
-//	//@ApiOperation(value = "update", notes = "获取商品信息(用于数据同步)", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
-//	@RequestMapping(value="/update",method=RequestMethod.POST)
-//	public Object update(@RequestBody SwtUser swtUser){
+//	@ApiOperation(value="新增", notes="新增实体", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+//	@ApiImplicitParams({
+//			@ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "String")
+//	})
+//	@PostMapping("/create")
+//	@CtlResultAnnotation
+//	@CtlValidAnnotation
+//	public ResultVO<Long> create(@RequestBody @Valid ZuifanCondition zuifanCondition, BindingResult validResult, String userId){
 //
-//		return this.swtUserService.updateByPrimaryKeySelective(swtUser);
+//		ResultVO<Long> vo = new ResultVO<>();
+//		if(StringUtils.isEmpty(userId)){
+//			throw new ValidateFailedException("参数不合法：[ userId ] 不能为空");
+//		}
+//		ZuifanConditionExample example = new ZuifanConditionExample();
+//		example.createCriteria().andCnameEqualTo(zuifanCondition.getCname()).andCreateByEqualTo(userId);
+//		List<ZuifanCondition> list = this.zuifanConditionService.selectByExample(example);
+//		if(!CollectionUtils.isEmpty(list) && list.size() == 1){
+//			throw new ValidateFailedException("条件名：[ " + zuifanCondition.getCname() + " ] 在用户 [ " + userId + " ] 下已存在，不可重复创建! ");
+//		}
 //
+//		zuifanCondition.setCreateBy(userId);
+//		zuifanCondition.setUpdateBy(userId);
+//		vo.setData(this.zuifanConditionService.insertZuiFanCondition(zuifanCondition));
+//		return vo;
+//	}
+
+//	@ApiOperation(value="更新", notes="根据主键指定更新实体，并根据传过来的实体信息来更新实体详情", httpMethod = "PUT", produces = MediaType.APPLICATION_JSON_VALUE)
+//	@ApiImplicitParams({
+//			@ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "Long"),
+//			@ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "String")
+//			//@ApiImplicitParam(name = "zuifanCondition", value = "实体", required = true, dataType = "ZuifanCondition")
+//	})
+//	@PutMapping("/{id}")
+//	@CtlResultAnnotation
+//	@CtlValidAnnotation
+//	public ResultVO<Integer> update(@PathVariable Long id,@RequestBody @Valid ZuifanCondition zuifanCondition, String userId,BindingResult validResult){
+//
+//		ResultVO<Integer> vo = new ResultVO<>();
+//		zuifanCondition.setUpdateBy(userId);
+//		vo.setData(Integer.parseInt(this.zuifanConditionService.updateByPrimaryKeySelective(zuifanCondition) + ""));
+//		return vo;
+//	}
+
+//	@ApiOperation(value="详情", notes="根据主键获取实体详情", httpMethod = "GET", produces = MediaType.APPLICATION_JSON_VALUE)
+//	@ApiImplicitParams({
+//			@ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "Long")
+//	})
+//	@GetMapping("/{id}")
+//	@CtlResultAnnotation
+//	public ResultVO<ZuifanCondition> view(@PathVariable Long id){
+//
+//		ResultVO<ZuifanCondition> vo = new ResultVO<>();
+//		vo.setData(this.zuifanConditionService.selectByPrimaryKey(id));
+//		return vo;
 //	}
 //
-//	//@ApiOperation(value = "view", notes = "获取商品信息(用于数据同步)", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
-//	@RequestMapping(value="/view",method=RequestMethod.GET)
-//	public Object view(@RequestParam Long id){
+//	@ApiOperation(value = "单个删除", notes = "根据主键删除实体", httpMethod = "DELETE", produces = MediaType.APPLICATION_JSON_VALUE)
+//	@ApiImplicitParams({
+//			@ApiImplicitParam(name = "id", value = "主键", required = true, dataType = "Long")
+//	})
+//	@DeleteMapping("/{id}")
+//	@CtlResultAnnotation
+//	public ResultVO<Integer> delete(@PathVariable Long id){
 //
-//		return this.swtUserService.selectByPrimaryKey(id);
-//
+//		ResultVO<Integer> vo = new ResultVO<>();
+//		vo.setData(this.zuifanConditionService.deleteByPrimaryKey(id));
+//		return vo;
 //	}
 //
+//	@ApiOperation(value="批量删除", notes="根据主键数组删除实体集合", httpMethod = "DELETE", produces = MediaType.APPLICATION_JSON_VALUE)
+//	@DeleteMapping("/delete")
+//	@CtlResultAnnotation
+//	public ResultVO<Integer> delete(@RequestBody List<Long> ids){
 //
-//	//@ApiOperation(value = "delete", notes = "获取商品信息(用于数据同步)", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
-//	@RequestMapping(value="/delete",method=RequestMethod.POST)
-//	public Object delete(@RequestBody Map<String,Long> ids){
-//
-//		return this.swtUserService.deleteByPrimaryKey(ids.get("id"));
+//		ResultVO<Integer> vo = new ResultVO<>();
+//		vo.setData(this.zuifanConditionService.deleteByPrimaryKeys(ids));
+//		return vo;
 //
 //	}
 	

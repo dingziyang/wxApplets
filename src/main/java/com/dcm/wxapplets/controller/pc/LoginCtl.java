@@ -4,7 +4,6 @@ import com.dcm.wxapplets.config.GlobalConstant;
 import com.dcm.wxapplets.config.ResultCode;
 import com.dcm.wxapplets.config.ResultVO;
 import com.dcm.wxapplets.entity.SwtUser;
-import com.dcm.wxapplets.entity.Unit;
 import com.dcm.wxapplets.query.SwtUserExample;
 import com.dcm.wxapplets.service.SwtUserService;
 import com.dcm.wxapplets.utils.date.DateUtil;
